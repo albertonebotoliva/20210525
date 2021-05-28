@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -12,7 +11,11 @@ const useStyles = makeStyles({
     }
 });
 
-const ErrorBox = ({ error, resetErrorBoundary }) => {
+type Props = {
+    error: { message: string }
+};
+
+function ErrorBox({ error }: Props) {
     const classes = useStyles();
 
     return (
@@ -24,15 +27,5 @@ const ErrorBox = ({ error, resetErrorBoundary }) => {
         </Grid>
     )
 }
-
-ErrorBox.propTypes = {
-    error: PropTypes.object,
-    resetErrorBoundary: PropTypes.func.isRequired
-};
-
-ErrorBox.defaultProps = {
-    error: {},
-    resetErrorBoundary: () => { }
-};
 
 export default ErrorBox;
