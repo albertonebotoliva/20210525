@@ -5,10 +5,13 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     devtool: 'source-map',
-    entry: "./src/index.js",
+    entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "index_bundle.js"
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [{
@@ -36,6 +39,11 @@ module.exports = {
                     loader: 'file-loader'
                 }
             ]
+        },
+        {
+            test: /\.tsx?$/,
+            exclude: /node_modules/,
+            loader: 'ts-loader'
         }
         ]
     },

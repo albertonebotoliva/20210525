@@ -1,19 +1,23 @@
-import React, { useReducer } from 'react';
+import * as React from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorBox from '../layout/errorBox'
-import { reducer, initialState } from '../../stores';
+import { reducer, initialState } from '../../store/reducer';
 
 const useStyles = makeStyles({
 
 });
 
-const ErrorFallback = props => <ErrorBox {...props} />
+type Error = {
+    error: { message: string }
+}
 
-const View = () => {
+function ErrorFallback(props: Error) { return <ErrorBox {...props} /> }
+
+function View() {
     const classes = useStyles();
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = React.useReducer(reducer, initialState);
 
     return (
         <ErrorBoundary
@@ -22,15 +26,11 @@ const View = () => {
         >
             <Grid container spacing={0}>
                 <Grid item xs={12} >
-
+                    HELLO
                 </Grid>
             </Grid>
         </ErrorBoundary>
     )
 }
-
-View.propTypes = {}
-
-View.defaultProps = {}
 
 export default View;
